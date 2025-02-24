@@ -39,7 +39,7 @@ namespace balleprojet
             wall1 = new Wall();                 // Création du mur du joueur 1
             wall2 = new Wall();                 // Création du mur du joueur 2
             currentPlayer = player1;            // Le joueur 1 commence
-            soundManager = new SoundManager("Chemin vers fichier.wav"); // Déclaration de SoundManager
+            soundManager = new SoundManager("C:\\Users\\pb58unc\\Desktop\\DenisMatias07.02.2025\\laser-shot-ingame-230500.wav"); // Déclaration de SoundManager
         }
 
         /// <summary>
