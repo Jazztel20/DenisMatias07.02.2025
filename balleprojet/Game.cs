@@ -25,6 +25,7 @@ namespace balleprojet
         private Wall wall2;             // Mur 2
         private Player currentPlayer;   // Joueur actuel
         private Random _random = new Random();   // Random
+        private SoundManager soundManager;
        
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace balleprojet
             wall1 = new Wall();                 // Création du mur du joueur 1
             wall2 = new Wall();                 // Création du mur du joueur 2
             currentPlayer = player1;            // Le joueur 1 commence
+            soundManager = new SoundManager("Chemin vers fichier.wav"); // Déclaration de SoundManager
         }
 
         /// <summary>
@@ -90,10 +92,13 @@ namespace balleprojet
         /// </summary>
         private void PlayTurn()
         {
-            Console.WriteLine($"{currentPlayer.Name}'s turn");  // Afficher le tour du joueur courant
-            int angle = ChooseAngle();                          // Choisir l'angle de tir
-            int power = ChoosePower();                          // Déterminer la puissance de tir
-            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2,8));                      // Créer une balle avec l'angle et la puissance
+            Console.WriteLine($"{currentPlayer.Name}'s turn");                  // Afficher le tour du joueur courant
+            int angle = ChooseAngle();                                          // Choisir l'angle de tir
+            int power = ChoosePower();                                          // Déterminer la puissance de tir
+            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2,8));     // Créer une balle avec l'angle et la puissance
+
+            // Jouer le son lorsque la balle est lancée
+            soundManager.PlaySound();
 
             // Position de départ en fonction du point sélectionné
             int playerX = currentPlayer == player1 ? 20 : 125;
