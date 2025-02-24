@@ -6,6 +6,9 @@
  Classe: FID1
  *******************************************************************************/
 
+// Ligne pour utiliser Sound Manager
+using System.Media;
+
 // Déclaration de l'espace de noms "balleprojet"
 namespace balleprojet
 {
@@ -14,5 +17,18 @@ namespace balleprojet
     /// </summary>
     internal class SoundManager
     {
+        private SoundPlayer soundPlayer;
+
+        public SoundManager(string soundFilePath)
+        {
+            // Initialisation de SoundPlayer avec le fichier son
+            soundPlayer = new SoundPlayer(soundFilePath);
+        }
+
+        public void PlaySiund()
+        {
+            // Jouer le son
+            soundPlayer.Play();
+        }
     }
 }
