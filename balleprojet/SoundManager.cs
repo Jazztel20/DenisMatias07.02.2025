@@ -25,7 +25,7 @@ namespace balleprojet
             soundPlayer = new SoundPlayer(soundFilePath);
         }
 
-        public void PlaySiund()
+        public void PlaySound()
         {
             // Jouer le son
             soundPlayer.Play();
