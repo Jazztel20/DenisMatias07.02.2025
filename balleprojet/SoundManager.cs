@@ -13,21 +13,29 @@ using System.Media;
 namespace balleprojet
 {
     /// <summary>
-    /// Déclaration de la classe "SoundManager"
+    /// Déclaration de la classe "SoundManager" pour gérer les sons
     /// </summary>
     internal class SoundManager
     {
+        // Déclaration de SoundPlayer
         private SoundPlayer soundPlayer;
 
+        /// <summary>
+        /// Constructeur de la classe SoundManager
+        /// </summary>
+        /// <param name="soundFilePath"></param>
         public SoundManager(string soundFilePath)
         {
             // Initialisation de SoundPlayer avec le fichier son
             soundPlayer = new SoundPlayer(soundFilePath);
         }
 
+        /// <summary>
+        /// Méthode pour jouer le son 
+        /// </summary>
         public void PlaySound()
         {
-            // Jouer le son
+            // Joue le son
             soundPlayer.Play();
         }
     }
