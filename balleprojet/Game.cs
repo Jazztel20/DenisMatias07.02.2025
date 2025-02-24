@@ -1,69 +1,99 @@
-﻿using System;
+﻿/********************************************************************************
+ Programmation Orientée Objet en C#
+ Projet: Jeu de la balle
+ Prénom et nom : Matias Denis
+ Cours: I320
+ Classe: FID1
+ *******************************************************************************/
+
+using System;
 using System.Diagnostics;
 
+// Déclaration de l'espace de noms "balleprojet"
 namespace balleprojet
 {
+    /// <summary>
+    /// Déclaration de classe "Game"
+    /// </summary>
     internal class Game
     {
-        private Player player1;
-        private Player player2;
-        private Ball ball;
-        private Wall wall1;
-        private Wall wall2;
-        private Player currentPlayer;
+        // Variables privées de la classe "Game"
+        private Player player1;         // Joueur 1
+        private Player player2;         // Joueur 2
+        private Ball ball;              // Balle
+        private Wall wall1;             // Mur 1
+        private Wall wall2;             // Mur 2
+        private Player currentPlayer;   // Joueur actuel
+        private Random _random = new Random();   // Random
+       
 
+        /// <summary>
+        /// Constructeur de la classe Game
+        /// </summary>
         public Game()
         {
-            player1 = new Player("Joueur 1");
-            player2 = new Player("Joueur 2");
-            wall1 = new Wall();
-            wall2 = new Wall();
-            currentPlayer = player1; // Le joueur 1 commence
+            // Initialisation des joueurs et des murs
+            player1 = new Player("Joueur 1");   // Création du joueur 1
+            player2 = new Player("Joueur 2");   // Création du joueur 2
+            wall1 = new Wall();                 // Création du mur du joueur 1
+            wall2 = new Wall();                 // Création du mur du joueur 2
+            currentPlayer = player1;            // Le joueur 1 commence
         }
 
+        /// <summary>
+        /// Méthode pour démarrer le jeu
+        /// </summary>
         public void Start()
         {
+            // Définition de la taille de la fenêtre console et effacement de l'écran
             Console.SetWindowSize(150, 40);
             Console.Clear();
 
+            // Boucle de jeu principale
             while (player1.Lives > 0 && player2.Lives > 0 && player1.Score < 7 && player2.Score < 7)
             {
-                DisplayInterface();
-                PlayTurn();
-                SwitchPlayer();
+                DisplayInterface();     // Affichage de l'interface
+                PlayTurn();             // Exécution du tour de jeu
+                SwitchPlayer();         // Changement de joueur
             }
-            EndGame();
+            EndGame();                  // Fin de la partie
         }
 
+        /// <summary>
+        /// Méthode pour afficher l'interface du jeu
+        /// </summary>
         private void DisplayInterface()
         {
-            Console.Clear();
-            Console.SetCursorPosition(5, 1);
-            Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");
-            Console.SetCursorPosition(100, 1);
-            Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");
-            Console.SetCursorPosition(0, 2);
-            Console.WriteLine(new string('_', 150));
+            Console.Clear();                                                                                        // Effacer l'écrant
+            Console.SetCursorPosition(5, 1);                                                                        // Positionner le curseur
+            Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");    // Afficher les vies et le score du joueur 1
+            Console.SetCursorPosition(100, 1);                                                                      // Positionner le curseur
+            Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");    // Afficher les vies et le score du joueur 2
+            Console.SetCursorPosition(0, 2);                                                                        // Positionner le curseur
+            Console.WriteLine(new string('_', 150));                                                                // Afficher une ligne de séparation
 
-            DrawPlayer(20, 32, true);
-            DrawPlayer(125, 32, false);
+            DrawPlayer(20, 32, true);       // Dessiner le joueur 1
+            DrawPlayer(125, 32, false);     // Dessiner le joueur 2
 
-            DrawWall(110, 30);
-            DrawWall(35, 30);
+            DrawWall(110, 30);              // Dessiner le mur du joueur 1
+            DrawWall(35, 30);               // Dessiner le mur du joueur 2
 
-            Console.SetCursorPosition(0, 35);
-            Console.WriteLine(new string('-', 150));
-            Console.SetCursorPosition(0, 38);
-            Console.Write("Appuyez sur une touche pour continuer...");
-            Console.ReadKey();
+            Console.SetCursorPosition(0, 35);                           // Positionner le curseur
+            Console.WriteLine(new string('-', 150));                    // Afficher une ligne
+            Console.SetCursorPosition(0, 38);                           // Positionner le curseur
+            Console.Write("Appuyez sur une touche pour continuer...");  // Afficher le message d'attente
+            Console.ReadKey();                                          // Attendre une touche
         }
 
+        /// <summary>
+        /// Méthode pour exécuter un tour de jeu
+        /// </summary>
         private void PlayTurn()
         {
-            Console.WriteLine($"{currentPlayer.Name}'s turn");
-            int angle = ChooseAngle();
-            int power = ChoosePower();  // Déterminer la puissance de tir
-            ball = new Ball(angle, power);  // Créer une balle avec l'angle et la puissance
+            Console.WriteLine($"{currentPlayer.Name}'s turn");  // Afficher le tour du joueur courant
+            int angle = ChooseAngle();                          // Choisir l'angle de tir
+            int power = ChoosePower();                          // Déterminer la puissance de tir
+            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2,8));                      // Créer une balle avec l'angle et la puissance
 
             // Position de départ en fonction du point sélectionné
             int playerX = currentPlayer == player1 ? 20 : 125;
@@ -71,13 +101,21 @@ namespace balleprojet
             int startX = currentPlayer == player1 ? playerX + 2 + 2 * (angle / 10) : playerX - (2 + 2 * (angle / 10));
             int startY = playerY - (angle / 10);
 
-            Console.Clear();
-            DisplayInterface();
-            ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2);  // Passer les références des joueurs et des murs
-                                                                                                                        // Code pour gérer les collisions avec le mur et l'adversaire
+            Console.Clear();        // Effacer l'écran
+            DisplayInterface();     // Afficher l'interface
+
+            // Calcul de la trajectoire de la balle et gestion des collisions
+            ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2);  
+            // Code à mettre pour gérer les collisions avec le mur et l'adversaire
         }
 
-
+        /// <summary>
+        /// Méthode pour afficher la sélection d'angle 
+        /// </summary>
+        /// <param name="playerX"></param>
+        /// <param name="playerY"></param>
+        /// <param name="isPlayer1"></param>
+        /// <returns></returns>
         private int DisplayAngleSelection(int playerX, int playerY, bool isPlayer1)
         {
             int[][] points;
@@ -110,6 +148,7 @@ namespace balleprojet
             int[] angles = { 70, 45, 35, 25, 15 };
             int selectedIndex = 0;
 
+            // Boucle pour afficher la sélection de l'angle
             while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Spacebar)
             {
                 // Effacer les anciens points
@@ -142,20 +181,30 @@ namespace balleprojet
             return angles[selectedIndex];
         }
 
-
+        /// <summary>
+        /// Méthode pour choisir l'angle de tir
+        /// </summary>
+        /// <returns></returns>
         private int ChooseAngle()
         {
-            Console.Clear();
-            DisplayInterface();
-            int playerX = currentPlayer == player1 ? 20 : 125;
+            Console.Clear();        // Effacer l'écran 
+            DisplayInterface();     // Afficher l'interface
+            int playerX = currentPlayer == player1 ? 20 : 125; // Opérateur ternaire 
+
             int playerY = 32;
 
             int angle = DisplayAngleSelection(playerX, playerY, currentPlayer == player1);
+
+            // Afficher l'angle sélectionné dans le débogueur
             Debug.WriteLine($"\nAngle sélectionné: {angle}°");
 
             return angle;
         }
 
+        /// <summary>
+        /// Méthode pour afficher la barre de puissance
+        /// </summary>
+        /// <returns></returns>
         private int ChoosePower()
         {
             Console.WriteLine("Appuyez sur espace pour déterminer la puissance du tir...");
@@ -184,23 +233,36 @@ namespace balleprojet
                     Console.SetCursorPosition(6 + power, 5);
                     Console.Write("|");
                 }
-                System.Threading.Thread.Sleep(10); // Vitesse de la barre de progression
+                // Vitesse de la barre de progression
+                System.Threading.Thread.Sleep(10); 
             }
 
             return power;
         }
 
+        /// <summary>
+        /// Méthode pour changer de joueur
+        /// </summary>
         private void SwitchPlayer()
         {
             currentPlayer = currentPlayer == player1 ? player2 : player1;
         }
 
+        /// <summary>
+        /// Méthode pour afficher la fin de la partie
+        /// </summary>
         private void EndGame()
         {
             Player winner = player1.Score >= 7 || player2.Lives <= 0 ? player1 : player2;
             Console.WriteLine($"Le gagnant est {winner.Name} !");
         }
 
+        /// <summary>
+        /// Méthode pour dessiner un joueur
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="isLeft"></param>
         private void DrawPlayer(int x, int y, bool isLeft)
         {
             if (isLeft)
@@ -223,6 +285,11 @@ namespace balleprojet
             }
         }
 
+        /// <summary>
+        /// Méthode pour dessiner un mur
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void DrawWall(int x, int y)
         {
             for (int i = 0; i < 5; i++)
