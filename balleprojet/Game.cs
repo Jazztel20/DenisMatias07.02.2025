@@ -302,7 +302,7 @@ namespace balleprojet
                 Console.SetCursorPosition(x, y + i);
                 if (wall.Cells[i, 0].EstVisible)
                 {
-                    Console.Write("███");
+                    Console.Write("█");
                 }
                 else
                 {
