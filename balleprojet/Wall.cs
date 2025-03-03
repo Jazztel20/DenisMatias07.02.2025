@@ -7,6 +7,8 @@
  *******************************************************************************/
 
 // Déclaration de l'espace de noms "balleprojet"
+using System.Data;
+
 namespace balleprojet
 {
     /// <summary>
@@ -15,7 +17,7 @@ namespace balleprojet
     internal class Wall
     {
         /// <summary>
-        /// Tableau 
+        /// Tableau à deux dimension pour les murs
         /// </summary>
         public Mur[,] Cells { get; private set; }
 
@@ -25,12 +27,15 @@ namespace balleprojet
         public Wall()
         {
             // Initialise les cellules avec un tableau 2D de 6 lignes et 1 colonne
-            Cells = new Mur[6, 1];      // 6 cases formant le mur
-            
+            Cells = new Mur[6, 3];      // 6 cases formant le mur
+
             // Boucle pour initialiser chaque cellule à 1 
             for (int i = 0; i < 6; i++)
             {
-                Cells[i, 0] = new Mur();      // Cellule présente
+                for (int j = 0; j < 3; j++)
+                {
+                    Cells[i, j] = new Mur();      // Cellule présente
+                }
             }
         }
 
@@ -38,13 +43,13 @@ namespace balleprojet
         /// Méthode pour gérer les coups sur le mur 
         /// </summary>
         /// <param name="position">Position</param>
-        public bool Hit(int position)
+        public bool Hit(int row, int col)
         {
             // Si la cellule à la position donnée est présente
-            if (position >= 0 && position < Cells.GetLength(0) && Cells[position, 0].EstVisible)
+            if (row >= 0 && row < Cells.GetLength(0) && col >= 0 && col < Cells.GetLength(1) && Cells[row, col].EstVisible)
             {
                 // La cellule touchée disparaît (devient 0)
-                Cells[position, 0].EstVisible = false;
+                Cells[row, col].EstVisible = false;
                 return true;
             }
             return false;
