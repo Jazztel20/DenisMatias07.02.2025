@@ -299,17 +299,19 @@ namespace balleprojet
         {
             for (int i = 0; i < 6; i++)
             {
-                Console.SetCursorPosition(x, y + i);
-                if (wall.Cells[i, 0].EstVisible)
+                for (int j = 0; j < 3; j++)
                 {
-                    Console.Write("█");
-                }
-                else
-                {
-                    Console.Write("   "); // Effacer la cellule touchée 
+                    Console.SetCursorPosition(x + j * 3, y + i);
+                    if (wall.Cells[i, j].EstVisible)
+                    {
+                        Console.Write("█");
+                    }
+                    else
+                    {
+                        Console.Write("   "); // Effacer la cellule touchée 
+                    }
                 }
             }
-
         }
     }
 }
