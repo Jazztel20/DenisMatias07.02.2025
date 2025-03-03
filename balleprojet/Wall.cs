@@ -41,7 +41,7 @@ namespace balleprojet
         public bool Hit(int position)
         {
             // Si la cellule à la position donnée est présente
-            if (position >= 0 && position < Cells.Length && Cells[position, 0].EstVisible)
+            if (position >= 0 && position < Cells.GetLength(0) && Cells[position, 0].EstVisible)
             {
                 // La cellule touchée disparaît (devient 0)
                 Cells[position, 0].EstVisible = false;
@@ -52,6 +52,6 @@ namespace balleprojet
     }
     internal class Mur
     {
-        public bool EstVisible { get; set; }
+        public bool EstVisible { get; set; } = true;
     }
 }
