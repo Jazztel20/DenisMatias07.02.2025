@@ -55,6 +55,10 @@ namespace balleprojet
             return false;
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     internal class Mur
     {
         public bool EstVisible { get; set; } = true;
