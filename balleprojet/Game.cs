@@ -77,8 +77,8 @@ namespace balleprojet
             DrawPlayer(20, 32, true);       // Dessiner le joueur 1
             DrawPlayer(125, 32, false);     // Dessiner le joueur 2
 
-            DrawWall(110, 30);              // Dessiner le mur du joueur 1
-            DrawWall(35, 30);               // Dessiner le mur du joueur 2
+            DrawWall(110, 30, wall2);              // Dessiner le mur du joueur 1
+            DrawWall(35, 30, wall1);               // Dessiner le mur du joueur 2
 
             Console.SetCursorPosition(0, 35);                           // Positionner le curseur
             Console.WriteLine(new string('-', 150));                    // Afficher une ligne
@@ -295,12 +295,19 @@ namespace balleprojet
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void DrawWall(int x, int y)
+        private void DrawWall(int x, int y, Wall wall)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                Console.Write("███");
+                if (wall.Cells[i, 0].EstVisible)
+                {
+                    Console.Write("███");
+                }
+                else
+                {
+                    Console.Write("   "); // Effacer la cellule touchée 
+                }
             }
 
         }
