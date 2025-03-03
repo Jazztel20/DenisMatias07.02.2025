@@ -15,7 +15,7 @@ namespace balleprojet
     internal class Wall
     {
         /// <summary>
-        /// Propriété publique en lecture seule qui représente les cellules du mur
+        /// Tableau 
         /// </summary>
         public Mur[,] Cells { get; private set; }
 
@@ -41,7 +41,7 @@ namespace balleprojet
         public bool Hit(int position)
         {
             // Si la cellule à la position donnée est présente
-            if (Cells[position, 0].EstVisible)
+            if (position >= 0 && position < Cells.Length && Cells[position, 0].EstVisible)
             {
                 // La cellule touchée disparaît (devient 0)
                 Cells[position, 0].EstVisible = false;
