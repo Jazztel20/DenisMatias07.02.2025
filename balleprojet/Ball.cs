@@ -97,14 +97,20 @@ namespace balleprojet
                 // Vérification des collisions avec le mur adverse
                 if (isRight && (int)nextX >= 110 && (int)nextX <= 113 && (int)nextY >= 25 && (int)nextY <= 30)      // Joueur 1 tire sur le mur du joueur 2
                 {
-                    wall2.Hit((int)nextY - 25);                                                                     // Disparaître la case touchée
-                    player1.Score++;                                                                                // Le joueur 1 marque un point
+                    if (wall2.Hit((int)nextY - 25))     // Disparition de la case touchée
+                    {
+                        player1.Score++;                // Le joueur 1 marque un point
+                        Console.WriteLine("Mur touché! Points: " + player1.Score); // Affichage des points
+                    }
                     break;
                 }
                 else if (!isRight && (int)nextX >= 35 && (int)nextX <= 38 && (int)nextY >= 25 && (int)nextY <= 30)  // Joueur 2 tire sur le mur du joueur 1
                 {
-                    wall1.Hit((int)nextY - 25);     // Disparaître la case touchée
-                    player2.Score++;                // Le joueur 2 marque un point
+                    if (wall1.Hit((int)nextY - 25))     // Disparition de la case touchée
+                    {
+                        player2.Score++;
+                        Console.WriteLine("Mur touché! Points: " + player2.Score); // Affichage des points
+                    }
                     break;
                 }
 
