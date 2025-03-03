@@ -95,21 +95,23 @@ namespace balleprojet
                 Console.ResetColor();
 
                 // Vérification des collisions avec le mur adverse
-                if (isRight && (int)nextX >= 110 && (int)nextX <= 113 && (int)nextY >= 25 && (int)nextY <= 30)      // Joueur 1 tire sur le mur du joueur 2
+                if (isRight && (int)nextX >= 110 && (int)nextX <= 113 && (int)nextY >= 25 && (int)nextY <= 30)
                 {
-                    if (wall2.Hit((int)nextY - 25))     // Disparition de la case touchée
+                    if (wall2.Hit((int)nextY - 25)) // Utilisation de la méthode Hit de la classe Wall
                     {
-                        player1.Score++;                // Le joueur 1 marque un point
-                        Console.WriteLine("Mur touché! Points: " + player1.Score); // Affichage des points
+                        player1.Score++;
+                        Console.SetCursorPosition(5, 1); // Mise à jour de l'affichage du score
+                        Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");
                     }
                     break;
                 }
-                else if (!isRight && (int)nextX >= 35 && (int)nextX <= 38 && (int)nextY >= 25 && (int)nextY <= 30)  // Joueur 2 tire sur le mur du joueur 1
+                else if (!isRight && (int)nextX >= 35 && (int)nextX <= 38 && (int)nextY >= 25 && (int)nextY <= 30)
                 {
-                    if (wall1.Hit((int)nextY - 25))     // Disparition de la case touchée
+                    if (wall1.Hit((int)nextY - 25)) // Utilisation de la méthode Hit de la classe Wall
                     {
                         player2.Score++;
-                        Console.WriteLine("Mur touché! Points: " + player2.Score); // Affichage des points
+                        Console.SetCursorPosition(100, 1); // Mise à jour de l'affichage du score
+                        Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");
                     }
                     break;
                 }
