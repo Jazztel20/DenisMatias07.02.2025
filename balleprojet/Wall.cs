@@ -17,7 +17,7 @@ namespace balleprojet
         /// <summary>
         /// Propriété publique en lecture seule qui représente les cellules du mur
         /// </summary>
-        public int[,] Cells { get; private set; }
+        public Mur[,] Cells { get; private set; }
 
         /// <summary>
         /// Constructeur de la classe "Wall"
@@ -25,12 +25,12 @@ namespace balleprojet
         public Wall()
         {
             // Initialise les cellules avec un tableau 2D de 6 lignes et 1 colonne
-            Cells = new int[6, 1];      // 6 cases formant le mur
+            Cells = new Mur[6, 1];      // 6 cases formant le mur
             
             // Boucle pour initialiser chaque cellule à 1 
             for (int i = 0; i < 6; i++)
             {
-                Cells[i, 0] = 1;        // Cellule présente
+                Cells[i, 0] = new Mur();      // Cellule présente
             }
         }
 
@@ -38,14 +38,20 @@ namespace balleprojet
         /// Méthode pour gérer les coups sur le mur 
         /// </summary>
         /// <param name="position">Position</param>
-        public void Hit(int position)
+        public bool Hit(int position)
         {
             // Si la cellule à la position donnée est présente
-            if (Cells[position, 0] == 1)
+            if (Cells[position, 0].EstVisible)
             {
                 // La cellule touchée disparaît (devient 0)
-                Cells[position, 0] = 0; 
+                Cells[position, 0].EstVisible = false;
+                return true;
             }
+            return false;
         }
+    }
+    internal class Mur
+    {
+        public bool EstVisible { get; set; }
     }
 }
