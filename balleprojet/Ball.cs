@@ -85,7 +85,7 @@ namespace balleprojet
                 double nextY = startY - (initialVelocity * Math.Sin(angleInRadians) * t - 0.5 * gravity * t * t);
                 if (nextY > posY)
                 {
-                    Color = ConsoleColor.Red;
+                    Color = ConsoleColor.Yellow;
                 }
 
                 // Affichage de la position de la balle
