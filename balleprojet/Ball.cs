@@ -95,9 +95,10 @@ namespace balleprojet
                 Console.ResetColor();
 
                 // Vérification des collisions avec le mur adverse
-                if (isRight && (int)nextX >= 110 && (int)nextX <= 113 && (int)nextY >= 25 && (int)nextY <= 30)
+                if (isRight && (int)nextX >= 110 && (int)nextX <= 118 && (int)nextY >= 25 && (int)nextY <= 30)
                 {
-                    if (wall2.Hit((int)nextY - 25)) // Utilisation de la méthode Hit de la classe Wall
+                    int col = ((int)nextX - 110) / 3; // Définition de la colonne des cellules
+                    if (wall2.Hit((int)nextY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
                     {
                         player1.Score++;
                         Console.SetCursorPosition(5, 1); // Mise à jour de l'affichage du score
@@ -105,9 +106,10 @@ namespace balleprojet
                     }
                     break;
                 }
-                else if (!isRight && (int)nextX >= 35 && (int)nextX <= 38 && (int)nextY >= 25 && (int)nextY <= 30)
+                else if (!isRight && (int)nextX >= 35 && (int)nextX <= 43 && (int)nextY >= 25 && (int)nextY <= 30)
                 {
-                    if (wall1.Hit((int)nextY - 25)) // Utilisation de la méthode Hit de la classe Wall
+                    int col = ((int)nextX - 35) / 3; // Définition de la colonne des cellules
+                    if (wall1.Hit((int)nextY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
                     {
                         player2.Score++;
                         Console.SetCursorPosition(100, 1); // Mise à jour de l'affichage du score
@@ -115,7 +117,7 @@ namespace balleprojet
                     }
                     break;
                 }
-
+                
                 // Vérification des collisions avec le joueur adverse
                 if (isRight && (int)nextX >= 125 && (int)nextX <= 130 && (int)nextY >= 32 && (int)nextY <= 34) // Joueur 1 tire sur le joueur 2
                 {
