@@ -38,7 +38,7 @@ namespace balleprojet
         public Player(string name)
         {
             Name = name;    // Initialise la propriété name avec le paramètre name
-            Lives = 6;      // Initialise la propriété Lives à 6
+            Lives = 5;      // Initialise la propriété Lives à 6
             Score = 0;      // Initialise la propriété Score à 0
         }
     }
