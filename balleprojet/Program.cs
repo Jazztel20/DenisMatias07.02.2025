@@ -36,3 +36,10 @@ namespace balleprojet
         }
     }
 }
+
+
+/// régler problèmes collisions/positions balle - mur, 
+/// ajouter se rater contre son propre mur, 
+/// ajouter son à l'impact  
+/// rapport à compléter en expliquant la différence entre les méthodes de départ et celles utilisées, 
+/// ainsi que l'aide de l'IA
