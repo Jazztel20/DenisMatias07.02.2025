@@ -85,7 +85,9 @@ namespace balleprojet
             DrawWall(35, 30, wall1);               // Dessiner le mur du joueur 2
 
             Console.SetCursorPosition(0, 35);                           // Positionner le curseur
-            Console.WriteLine(new string('-', 150));                    // Afficher une ligne
+            Console.ForegroundColor = ConsoleColor.Green;               // Ligne délimitante en vert pour simuler de l'herbe
+            Console.WriteLine(new string('-', 150));                    // Afficher une ligne délimitante en bas de l'écran
+            Console.ResetColor();                                       // Fin du changement de couleur pour l'herbe
             Console.SetCursorPosition(0, 38);                           // Positionner le curseur
             Console.Write("Appuyez sur une touche pour continuer...");  // Afficher le message d'attente
             Console.ReadKey();                                          // Attendre une touche
@@ -264,6 +266,7 @@ namespace balleprojet
         {
             Player winner = player1.Score >= 7 || player2.Lives <= 0 ? player1 : player2;
             Console.WriteLine($"Le gagnant est {winner.Name} !");
+            Console.ReadLine();
         }
 
         /// <summary>
