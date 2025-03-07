@@ -271,7 +271,6 @@ namespace balleprojet
         {
             Player winner = player1.Score >= 7 || player2.Lives <= 0 ? player1 : player2;
             Console.WriteLine($"Le gagnant est {winner.Name} !");
-            Console.ReadLine();
         }
 
         /// <summary>
