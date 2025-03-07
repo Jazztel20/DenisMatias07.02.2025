@@ -25,8 +25,6 @@ namespace balleprojet
 
             // Appel de la méthode "Start" de l'objet "game" pour démarrer le jeu
             game.Start();
-
-            // Encapsulation à revoir !!!! et position de la balle
         }
     }
 }
