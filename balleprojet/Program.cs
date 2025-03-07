@@ -25,10 +25,12 @@ namespace balleprojet
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            // Définition de la taille de la fenêtre console et effacement de l'écran
+            Console.SetWindowSize(150, 40); // au début du programme
+
             // Création d'une instance de la classe "Game"
             Game game = new Game();
-            Console.SetCursorPosition(106,25);
-            Console.Write("X");
+
             // Appel de la méthode "Start" de l'objet "game" pour démarrer le jeu
             game.Start();
         }
