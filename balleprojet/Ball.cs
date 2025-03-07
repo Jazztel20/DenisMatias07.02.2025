@@ -12,6 +12,7 @@
  *******************************************************************************/
 
 using System;
+using System.Diagnostics;
 
 // Déclaration de l'espace de noms "balleprojet"
 namespace balleprojet
@@ -81,7 +82,7 @@ namespace balleprojet
             double t = 0.0;                                     // Temps initial
             double posX = startX;                               // Position initiale en X
             double posY = startY;                               // Position initiale en Y
-
+            int a = Convert.ToInt32(startX);                    // Conversion d'un long en int
             // Boucle qui fonctionne que tant que la balle est dans les limites du terrain
             while (posY <= 32 && posX >= 0 && posX <= 150)
             {
@@ -153,6 +154,7 @@ namespace balleprojet
                 // Effacer la position précédente de la balle
                 Console.SetCursorPosition((int)posX, (int)posY);
                 Console.Write(' ');
+                Debug.WriteLine("x: " + posX + "y: " + posY);
 
                 // Mise à jour des positions
                 posX = nextX;
