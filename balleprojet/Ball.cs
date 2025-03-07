@@ -87,8 +87,18 @@ namespace balleprojet
             while (posY <= 32 && posX >= 0 && posX <= 150)
             {
                 // Calcul des positions suivantes de la balle
-                double nextX = isRight ? (startX + initialVelocity * Math.Cos(angleInRadians) * t) : (startX - initialVelocity * Math.Cos(angleInRadians) * t);
+                double nextX = isRight 
+                    ? (startX + initialVelocity * Math.Cos(angleInRadians) * t) 
+                    : (startX - initialVelocity * Math.Cos(angleInRadians) * t);
                 double nextY = startY - (initialVelocity * Math.Sin(angleInRadians) * t - 0.5 * gravity * t * t);
+
+                // Arrondir les positions pour simplifier la détection de collision
+                int roundedX = (int)Math.Round(nextX);
+                int roundedY = (int)Math.Round(nextY);
+
+                // Débogage : Afficher les coordonnées actuelles de la balle
+                Console.SetCursorPosition(0, 35);
+
                 if (nextY > posY)
                 {
                     Color = ConsoleColor.Yellow;
@@ -101,10 +111,10 @@ namespace balleprojet
                 Console.ResetColor();
 
                 // Vérification des collisions avec le mur adverse
-                if (isRight && (int)nextX >= 110 && (int)nextX <= 118 && (int)nextY >= 25 && (int)nextY <= 30)
+                if (isRight && roundedX >= 110 && roundedX <= 118 && roundedY >= 25 && roundedY <= 30)
                 {
-                    int col = ((int)nextX - 110) / 3; // Définition de la colonne des cellules
-                    if (wall2.Hit((int)nextY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
+                    int col = (roundedX - 110) / 3; // Définition de la colonne des cellules
+                    if (wall2.Hit(roundedY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
                     {
                         player1.Score++;
                         Console.SetCursorPosition(5, 1); // Mise à jour de l'affichage du score
@@ -112,10 +122,10 @@ namespace balleprojet
                     }
                     break;
                 }
-                else if (!isRight && (int)nextX >= 35 && (int)nextX <= 43 && (int)nextY >= 25 && (int)nextY <= 30)
+                else if (!isRight && roundedX >= 35 && roundedX <= 43 && roundedY >= 25 && roundedY <= 30)
                 {
-                    int col = ((int)nextX - 35) / 3; // Définition de la colonne des cellules
-                    if (wall1.Hit((int)nextY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
+                    int col = (roundedX - 35) / 3; // Définition de la colonne des cellules
+                    if (wall1.Hit(roundedY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
                     {
                         player2.Score++;
                         Console.SetCursorPosition(100, 1); // Mise à jour de l'affichage du score
