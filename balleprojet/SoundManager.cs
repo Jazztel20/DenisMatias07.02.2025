@@ -1,14 +1,13 @@
-﻿/********************************************************************************
- Programmation Orientée Objet en C#
- Projet: Jeu de la balle
- Prénom et nom : Matias Denis
- Cours: I320
- Classe: FID1
- Description: la classe SoundManager gère la lecture de fichiers
-              son en utilisant la classe SoundPlayer, avec un constructeur
-              pour initialiser le fichier audio et une méthode PlaySound pour
-              jouer avec les sons.
- *******************************************************************************/
+﻿
+/// Programmation Orientée Objet en C#
+/// Projet: Jeu de la balle
+/// Prénom et nom : Matias Denis
+/// Cours: I320
+/// Classe: FID1
+/// Description: la classe SoundManager gère la lecture de fichiers son
+///              en utilisant la classe SoundPlayer, avec un constructeur
+///              pour initialiser le fichier audio et une méthode PlaySound
+///              pourjouer avec les sons.
 
 // Ligne pour utiliser Sound Manager
 using System.Media;

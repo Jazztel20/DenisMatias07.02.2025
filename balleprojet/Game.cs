@@ -1,15 +1,14 @@
-﻿/********************************************************************************
- Programmation Orientée Objet en C#
- Projet: Jeu de la balle
- Prénom et nom : Matias Denis
- Cours: I320
- Classe: FID1
- Description: la classe Game orchestre le déroulement du jeu
-              en gérant les joueurs, les murs, la balle et l'interface
-              utilisateur, tout en encapsulant la logique des tours,
-              des collisions, de la sélection des angles et de la puissance,
-              ainsi que l'affichage et la fin de la partie.
- *******************************************************************************/
+﻿
+/// Programmation Orientée Objet en C#
+/// Projet: Jeu de la balle
+/// Prénom et nom : Matias Denis
+/// Cours: I320
+/// Classe: FID1
+/// Description: la classe Game orchestre le déroulement du jeu en gérant 
+///              les joueurs, les murs, la balle et l'interface 
+///              utilisateur, tout en encapsulant la logique des tours,
+///              des collisions, de la sélection des angles et de la
+///              puissance, ainsi que l'affichage et la fin de la partie.
 
 using System;
 using System.Diagnostics;
@@ -22,15 +21,45 @@ namespace balleprojet
     /// </summary>
     internal class Game
     {
-        // Variables privées de la classe "Game"
-        private Player player1;                     // Joueur 1
-        private Player player2;                     // Joueur 2
-        private Ball ball;                          // Balle
-        private Wall wall1;                         // Mur 1
-        private Wall wall2;                         // Mur 2
-        private Player currentPlayer;               // Joueur actuel
-        private Random _random = new Random();      // Random
-        private SoundManager soundManager;          // Son de tir
+        /// <summary>
+        /// Joueur 1
+        /// </summary>
+        private Player player1;
+        
+        /// <summary>
+        /// Joueur 2
+        /// </summary>
+        private Player player2;                     
+
+        /// <summary>
+        /// Balle
+        /// </summary>
+        private Ball ball;                          
+
+        /// <summary>
+        /// Mur 1
+        /// </summary>
+        private Wall wall1;                        
+
+        /// <summary>
+        /// Mur 2
+        /// </summary>
+        private Wall wall2;                         
+
+        /// <summary>
+        /// Joueur actuel
+        /// </summary>
+        private Player currentPlayer;               
+
+        /// <summary>
+        /// Random
+        /// </summary>
+        private Random _random = new Random();      
+
+        /// <summary>
+        /// Son de tir
+        /// </summary>
+        private SoundManager soundManager;          
        
 
         /// <summary>
@@ -45,6 +74,7 @@ namespace balleprojet
             wall2 = new Wall();                 // Création du mur du joueur 2
             currentPlayer = player1;            // Le joueur 1 commence
             soundManager = new SoundManager("C:\\Users\\pb58unc\\Desktop\\DenisMatias07.02.2025\\laser-shot-ingame-230500.wav"); // Déclaration de SoundManager
+            // son collision
         }
 
         /// <summary>
@@ -53,8 +83,8 @@ namespace balleprojet
         public void Start()
         {
             // Définition de la taille de la fenêtre console et effacement de l'écran
-            Console.SetWindowSize(150, 40);
-            Console.Clear();
+            Console.SetWindowSize(150, 40); // au début du programme
+            //Console.Clear();
 
             // Boucle de jeu principale
             while (player1.Lives > 0 && player2.Lives > 0 && player1.Score < 7 && player2.Score < 7)
@@ -71,7 +101,7 @@ namespace balleprojet
         /// </summary>
         private void DisplayInterface()
         {
-            Console.Clear();                                                                                        // Effacer l'écrant
+            //Console.Clear();                                                                                        // Effacer l'écrant
             Console.SetCursorPosition(5, 1);                                                                        // Positionner le curseur
             Console.ForegroundColor = ConsoleColor.Blue;                                                            // Couleur bleue pour le joueur 1
             Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");    // Afficher les vies et le score du joueur 1
@@ -117,7 +147,7 @@ namespace balleprojet
             int startX = currentPlayer == player1 ? playerX + 2 + 2 * (angle / 10) : playerX - (2 + 2 * (angle / 10));
             int startY = playerY - (angle / 10);
 
-            Console.Clear();        // Effacer l'écran
+           // Console.Clear();        // Effacer l'écran
             DisplayInterface();     // Afficher l'interface
 
             // Calcul de la trajectoire de la balle et gestion des collisions
@@ -203,7 +233,7 @@ namespace balleprojet
         /// <returns></returns>
         private int ChooseAngle()
         {
-            Console.Clear();        // Effacer l'écran 
+            //Console.Clear();        // Effacer l'écran 
             DisplayInterface();     // Afficher l'interface
             int playerX = currentPlayer == player1 ? 20 : 125; // Opérateur ternaire 
 
@@ -233,7 +263,7 @@ namespace balleprojet
         private int DisplayPowerBar()
         {
             int power = 0;
-            Console.Clear();
+            //Console.Clear();
             DisplayInterface();
 
             Console.SetCursorPosition(5, 5);

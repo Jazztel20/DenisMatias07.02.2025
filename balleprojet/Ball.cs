@@ -1,15 +1,14 @@
-﻿/********************************************************************************
- Programmation Orientée Objet en C#
- Projet: Jeu de la balle
- Prénom et nom : Matias Denis
- Cours: I320
- Classe: FID1
- Description: la classe Ball représente une balle avec des
-              propriétés comme l'angle, la puissance et la couleur, utilise
-              un constructeur pour initialiser ses attributs, et comprend une
-              méthode CalculateTrajectory pour simuler et visualiser le
-              déplacement et les collisions de la balle dans le jeu.
- *******************************************************************************/
+﻿
+/// Programmation Orientée Objet en C#
+/// Projet: Jeu de la balle
+/// Prénom et nom : Matias Denis
+/// Cours: I320
+/// Classe: FID1
+/// Description: la classe Ball représente une balle avec des propriétés 
+///              comme l'angle, la puissance et la couleur, utilise un 
+///              constructeur pour initialiser ses attributs, et comprend 
+///              une méthode CalculateTrajectory pour simuler et visualiser
+///              le déplacement et les collisions de la balle dans le jeu.
 
 using System;
 using System.Diagnostics;
@@ -82,7 +81,9 @@ namespace balleprojet
             double t = 0.0;                                     // Temps initial
             double posX = startX;                               // Position initiale en X
             double posY = startY;                               // Position initiale en Y
-            int a = Convert.ToInt32(startX);                    // Conversion d'un long en int
+            int a = Convert.ToInt32(startX);                    // Conversion d'un double en int
+            int b = Convert.ToInt32(startY);                    // Conversion d'un double en int
+
             // Boucle qui fonctionne que tant que la balle est dans les limites du terrain
             while (posY <= 32 && posX >= 0 && posX <= 150)
             {
@@ -91,6 +92,7 @@ namespace balleprojet
                     ? (startX + initialVelocity * Math.Cos(angleInRadians) * t) 
                     : (startX - initialVelocity * Math.Cos(angleInRadians) * t);
                 double nextY = startY - (initialVelocity * Math.Sin(angleInRadians) * t - 0.5 * gravity * t * t);
+                nextY += 1.0; // Ajustement de la position verticale 
 
                 // Arrondir les positions pour simplifier la détection de collision
                 int roundedX = (int)Math.Round(nextX);

@@ -1,14 +1,14 @@
-﻿/********************************************************************************
- Programmation Orientée Objet en C#
- Projet: Jeu de la balle
- Prénom et nom : Matias Denis
- Cours: I320
- Classe: FID1
- Description: la classe Player représente un joueur dans le
-              projet. Chaque joueur a des propriétés publiques (nom, vies et score)
-              initialisés, facilitant la gestion des attributs du joueur 
-              dans le jeu.
- *******************************************************************************/
+﻿
+/// Programmation Orientée Objet en C#
+/// Projet: Jeu de la balle
+/// Prénom et nom : Matias Denis
+/// Cours: I320
+/// Classe: FID1
+/// Description: la classe Player représente un joueur dans le projet. 
+///              Chaque joueur a des propriétés publiques (nom, vies 
+///              et score) initialisés, facilitant la gestion des 
+///              attributs du joueur dans le jeu.
+
 
 // Déclaration de l'espace de noms "balleprojet"
 namespace balleprojet
