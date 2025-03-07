@@ -4,11 +4,14 @@
  Prénom et nom : Matias Denis
  Cours: I320
  Classe: FID1
+
+ Fonctionnement de la classe: La classe Wall représente un mur composé d'un
+ tableau 2D de cellules (Mur), initialisées et manipulées via un constructeur,
+ permettant de gérer l'état de visibilité des cellules lorsqu'elles sont
+ touchées grâce à la méthode Hit.
  *******************************************************************************/
 
 // Déclaration de l'espace de noms "balleprojet"
-using System.Data;
-
 namespace balleprojet
 {
     /// <summary>

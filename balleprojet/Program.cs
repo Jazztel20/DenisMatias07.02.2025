@@ -4,6 +4,10 @@
  Prénom et nom : Matias Denis
  Cours: I320
  Classe: FID1
+
+ Fonctionnement de la classe: la classe Program contient le point d'entrée
+ principal du programme avec la méthode Main qui instancie un objet de la classe
+ Game et démarre le jeu en appelant sa méthode Start.
  *******************************************************************************/
 
 // Déclaration de l'espace de noms "balleprojet"

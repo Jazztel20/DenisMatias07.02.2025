@@ -4,6 +4,12 @@
  Prénom et nom : Matias Denis
  Cours: I320
  Classe: FID1
+
+ Fonctionnement de la classe: la classe Ball représente une balle avec des
+ propriétés comme l'angle, la puissance et la couleur, utilise un constructeur
+ pour initialiser ses attributs, et comprend une méthode CalculateTrajectory
+ pour simuler et visualiser le déplacement et les collisions de la balle dans
+ le jeu.
  *******************************************************************************/
 
 using System;
