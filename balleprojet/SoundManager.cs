@@ -5,9 +5,10 @@
  Cours: I320
  Classe: FID1
 
- Fonctionnement de la classe: la classe SoundManager gère la lecture de fichiers
- son en utilisant la classe SoundPlayer, avec un constructeur pour initialiser
- le fichier audio et une méthode PlaySound pour jouer avec les sons.
+ Description: la classe SoundManager gère la lecture de fichiers
+              son en utilisant la classe SoundPlayer, avec un constructeur
+              pour initialiser le fichier audio et une méthode PlaySound pour
+              jouer avec les sons.
  *******************************************************************************/
 
 // Ligne pour utiliser Sound Manager

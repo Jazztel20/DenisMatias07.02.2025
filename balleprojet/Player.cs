@@ -4,10 +4,10 @@
  Prénom et nom : Matias Denis
  Cours: I320
  Classe: FID1
-
- Fonctionnement de la classe: la classe Player représente un joueur dans le
- projet. Chaque joueur a des propriétés publiques (nom, vies et score)
- initialisés, facilitant la gestion des attributs du joueur dans le jeu.
+ Description: la classe Player représente un joueur dans le
+              projet. Chaque joueur a des propriétés publiques (nom, vies et score)
+              initialisés, facilitant la gestion des attributs du joueur 
+              dans le jeu.
  *******************************************************************************/
 
 // Déclaration de l'espace de noms "balleprojet"
