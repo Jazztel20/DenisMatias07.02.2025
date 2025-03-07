@@ -18,14 +18,14 @@ namespace balleprojet
     internal class Game
     {
         // Variables privées de la classe "Game"
-        private Player player1;         // Joueur 1
-        private Player player2;         // Joueur 2
-        private Ball ball;              // Balle
-        private Wall wall1;             // Mur 1
-        private Wall wall2;             // Mur 2
-        private Player currentPlayer;   // Joueur actuel
-        private Random _random = new Random();   // Random
-        private SoundManager soundManager;
+        private Player player1;                     // Joueur 1
+        private Player player2;                     // Joueur 2
+        private Ball ball;                          // Balle
+        private Wall wall1;                         // Mur 1
+        private Wall wall2;                         // Mur 2
+        private Player currentPlayer;               // Joueur actuel
+        private Random _random = new Random();      // Random
+        private SoundManager soundManager;          // Son de tir
        
 
         /// <summary>
