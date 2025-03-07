@@ -68,9 +68,13 @@ namespace balleprojet
         {
             Console.Clear();                                                                                        // Effacer l'écrant
             Console.SetCursorPosition(5, 1);                                                                        // Positionner le curseur
+            Console.ForegroundColor = ConsoleColor.Blue;                                                            // Couleur bleue pour le joueur 1
             Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");    // Afficher les vies et le score du joueur 1
+            Console.ResetColor();                                                                                   // Retour à la couleur de base
             Console.SetCursorPosition(100, 1);                                                                      // Positionner le curseur
+            Console.ForegroundColor= ConsoleColor.Red;                                                              // Couleur rouge pour le joueur 2
             Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");    // Afficher les vies et le score du joueur 2
+            Console.ResetColor();                                                                                   // Retour à la couleur de base
             Console.SetCursorPosition(0, 2);                                                                        // Positionner le curseur
             Console.WriteLine(new string('_', 150));                                                                // Afficher une ligne de séparation
 
@@ -272,21 +276,25 @@ namespace balleprojet
         {
             if (isLeft)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.SetCursorPosition(x, y);
                 Console.Write("  o/ ");
                 Console.SetCursorPosition(x, y + 1);
                 Console.Write(" /| ");
                 Console.SetCursorPosition(x, y + 2);
                 Console.Write(" / \\");
+                Console.ResetColor();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(x, y);
                 Console.Write("\\o ");
                 Console.SetCursorPosition(x, y + 1);
                 Console.Write(" |\\ ");
                 Console.SetCursorPosition(x, y + 2);
                 Console.Write("/ \\");
+                Console.ResetColor();
             }
         }
 
