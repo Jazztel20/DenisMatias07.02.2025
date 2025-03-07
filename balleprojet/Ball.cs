@@ -38,7 +38,7 @@ namespace balleprojet
         /// </summary>
         /// <param name="angle"></param>
         /// <param name="power"></param>
-        
+
         // ??
         private ConsoleColor _color = ConsoleColor.Green;
 
@@ -78,7 +78,7 @@ namespace balleprojet
             double posY = startY;                               // Position initiale en Y
 
             // Boucle qui fonctionne que tant que la balle est dans les limites du terrain
-            while (posY <= 32 && posX >= 0 && posX <= 150) 
+            while (posY <= 32 && posX >= 0 && posX <= 150)
             {
                 // Calcul des positions suivantes de la balle
                 double nextX = isRight ? (startX + initialVelocity * Math.Cos(angleInRadians) * t) : (startX - initialVelocity * Math.Cos(angleInRadians) * t);
@@ -117,7 +117,7 @@ namespace balleprojet
                     }
                     break;
                 }
-                
+
                 // Vérification des collisions avec le joueur adverse
                 if (isRight && (int)nextX >= 125 && (int)nextX <= 130 && (int)nextY >= 32 && (int)nextY <= 34) // Joueur 1 tire sur le joueur 2
                 {
