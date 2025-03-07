@@ -82,9 +82,7 @@ namespace balleprojet
         /// </summary>
         public void Start()
         {
-            // Définition de la taille de la fenêtre console et effacement de l'écran
-            Console.SetWindowSize(150, 40); // au début du programme
-            //Console.Clear();
+            Console.Clear();
 
             // Boucle de jeu principale
             while (player1.Lives > 0 && player2.Lives > 0 && player1.Score < 7 && player2.Score < 7)
@@ -101,7 +99,7 @@ namespace balleprojet
         /// </summary>
         private void DisplayInterface()
         {
-            //Console.Clear();                                                                                        // Effacer l'écrant
+            Console.Clear();                                                                                        // Effacer l'écrant
             Console.SetCursorPosition(5, 1);                                                                        // Positionner le curseur
             Console.ForegroundColor = ConsoleColor.Blue;                                                            // Couleur bleue pour le joueur 1
             Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");    // Afficher les vies et le score du joueur 1
@@ -147,7 +145,7 @@ namespace balleprojet
             int startX = currentPlayer == player1 ? playerX + 2 + 2 * (angle / 10) : playerX - (2 + 2 * (angle / 10));
             int startY = playerY - (angle / 10);
 
-           // Console.Clear();        // Effacer l'écran
+            Console.Clear();        // Effacer l'écran
             DisplayInterface();     // Afficher l'interface
 
             // Calcul de la trajectoire de la balle et gestion des collisions
@@ -233,7 +231,7 @@ namespace balleprojet
         /// <returns></returns>
         private int ChooseAngle()
         {
-            //Console.Clear();        // Effacer l'écran 
+            Console.Clear();        // Effacer l'écran 
             DisplayInterface();     // Afficher l'interface
             int playerX = currentPlayer == player1 ? 20 : 125; // Opérateur ternaire 
 
