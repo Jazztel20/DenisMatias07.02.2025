@@ -140,6 +140,7 @@ namespace balleprojet
                 t += timeStep;
             }
         }
+
         /// <summary>
         /// Vérifie collision précise avec mur, mise à jour score.
         /// </summary>
@@ -151,23 +152,23 @@ namespace balleprojet
         /// <returns></returns>
         private bool CheckWallCollision(int roundedX, int roundedY, Wall wall, bool isRight, Player attacker)
         {
-            int wallX = isRight ? 110 : 35;
-            int wallY = 25;
+            int wallX = isRight ? 110 : 35;     // X de départ du mur
+            int wallY = 25;                     // Y de départ du mur
 
+            // Vérification que la balle est dans la zone du mur
             if (roundedX >= wallX && roundedX <= wallX + 2 && roundedY >= wallY && roundedY < wallY + 6)
             {
-                int col = (roundedX - wallX); // 0, 1, 2
-                int row = (roundedY - wallY); // 0 à 5
+                int col = roundedX - wallX;     // Calcul de la colonne exacte (0 à 2)
+                int row = roundedY - wallY;     // Calcul de la ligne exacte (0 à 5)
 
-                if (wall.Hit(row, col))
+                if (wall.Hit(row, col))         // Si la cellule est touchée et encore visible
                 {
-                    attacker.Score++;
+                    attacker.Score++;          // Mise à jour du score
 
-                    // ✅ Redessiner uniquement la cellule touchée pour l'effacer
                     Console.SetCursorPosition(wallX + col, wallY + row);
-                    Console.Write(' '); // Effacer la cellule
+                    Console.Write(' ');        // Effacer visuellement la cellule touchée
 
-                    return true; // Collision confirmée
+                    return true;               // Collision confirmée
                 }
             }
             return false; // Pas de collision
