@@ -133,7 +133,7 @@ namespace balleprojet
             Console.WriteLine($"{currentPlayer.Name}'s turn");                  // Afficher le tour du joueur courant
             int angle = ChooseAngle();                                          // Choisir l'angle de tir
             int power = ChoosePower();                                          // Déterminer la puissance de tir
-            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2, 8));     // Créer une balle avec l'angle et la puissance
+            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2, 8));    // Créer une balle avec l'angle et la puissance
 
             // Jouer le son lorsque la balle est lancée
             soundManager.PlaySound();

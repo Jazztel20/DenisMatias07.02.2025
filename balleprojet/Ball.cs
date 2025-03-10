@@ -111,19 +111,24 @@ namespace balleprojet
                 if (isRight && CheckWallCollision(roundedX, roundedY, wall2, true, player1)) break;
                 if (!isRight && CheckWallCollision(roundedX, roundedY, wall1, false, player2)) break;
 
+                // Vérification collision avec son propre mur
+                if (isRight && CheckOwnWallCollision(roundedX, roundedY, wall1, isRight, player1, player2)) break;
+                if (!isRight && CheckOwnWallCollision(roundedX, roundedY, wall2, isRight, player2, player1)) break;
+
                 // Collision joueurs
-                if (isRight && roundedX >= 125 && roundedX <= 130 && roundedY >= 32 && roundedY <= 34)
+                if (isRight && roundedX >= 130 && roundedX <= 135 && roundedY >= 32 && roundedY <= 34)
                 {
                     player2.Lives--;
                     player1.Score++;
                     break;
                 }
-                else if (!isRight && roundedX >= 20 && roundedX <= 25 && roundedY >= 32 && roundedY <= 34)
+                else if (!isRight && roundedX >= 15 && roundedX <= 20 && roundedY >= 32 && roundedY <= 34)
                 {
                     player1.Lives--;
                     player2.Score++;
                     break;
                 }
+
 
                 // Pause pour visualiser le mouvement
                 System.Threading.Thread.Sleep(50);
@@ -139,6 +144,41 @@ namespace balleprojet
                 // Augmentation du temps
                 t += timeStep;
             }
+        }
+
+        /// <summary>
+        /// Vérifie si la balle touche son propre mur. Si oui, perte de vie et gain de score pour l'adversaire.
+        /// </summary>
+        private bool CheckOwnWallCollision(int roundedX, int roundedY, Wall ownWall, bool isRight, Player attacker, Player opponent)
+        {
+            int wallX = isRight ? 35 : 110; // Le mur du joueur qui tire
+            int wallY = 25;
+
+            if (roundedX >= wallX && roundedX <= wallX + 2 && roundedY >= wallY && roundedY < wallY + 6)
+            {
+                int col = roundedX - wallX;
+                int row = roundedY - wallY;
+
+                if (col >= 0 && col < 3 && row >= 0 && row < 6)
+                {
+                    if (ownWall.Hit(row, col)) // Si la cellule est touchée et encore visible
+                    {
+                        attacker.Lives--; // Le tireur perd une vie
+                        opponent.Score++; // L'adversaire gagne un point
+
+                        // Effacer visuellement la cellule touchée
+                        Console.SetCursorPosition(wallX + col, wallY + row);
+                        Console.Write(' ');
+
+                        // (Optionnel) Affichage pour debug
+                        // Console.SetCursorPosition(0, 34);
+                        // Console.Write($"Mur propre touché : Col {col}, Ligne {row} ");
+
+                        return true; // Collision avec son propre mur détectée
+                    }
+                }
+            }
+            return false; // Pas de collision
         }
 
         /// <summary>
