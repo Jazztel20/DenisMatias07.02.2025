@@ -43,7 +43,7 @@ namespace balleprojet
         /// <param name="angle"></param>
         /// <param name="power"></param>
 
-        // ??
+        //
         private ConsoleColor _color = ConsoleColor.Green;
 
         /// <summary>
@@ -80,8 +80,6 @@ namespace balleprojet
             double t = 0.0;                                     // Temps initial
             double posX = startX;                               // Position initiale en X
             double posY = startY;                               // Position initiale en Y
-            int a = Convert.ToInt32(startX);                    // Conversion d'un double en int
-            int b = Convert.ToInt32(startY);                    // Conversion d'un double en int
 
             // Boucle qui fonctionne que tant que la balle est dans les limites du terrain
             while (posY <= 32 && posX >= 0 && posX <= 150)
@@ -97,9 +95,7 @@ namespace balleprojet
                 int roundedX = (int)Math.Round(nextX);
                 int roundedY = (int)Math.Round(nextY);
 
-                // Débogage : Afficher les coordonnées actuelles de la balle
-                Console.SetCursorPosition(0, 35);
-
+                // Changement de couleur de la balle lors de la redescente
                 if (nextY > posY)
                 {
                     Color = ConsoleColor.Yellow;
@@ -112,40 +108,20 @@ namespace balleprojet
                 Console.ResetColor();
 
                 // Vérification des collisions avec le mur adverse
-                if (isRight && roundedX >= 110 && roundedX <= 118 && roundedY >= 25 && roundedY <= 30)
-                {
-                    int col = (roundedX - 110) / 3; // Définition de la colonne des cellules
-                    if (wall2.Hit(roundedY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
-                    {
-                        player1.Score++;
-                        Console.SetCursorPosition(5, 1); // Mise à jour de l'affichage du score
-                        Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");
-                    }
-                    break;
-                }
-                else if (!isRight && roundedX >= 35 && roundedX <= 43 && roundedY >= 25 && roundedY <= 30)
-                {
-                    int col = (roundedX - 35) / 3; // Définition de la colonne des cellules
-                    if (wall1.Hit(roundedY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
-                    {
-                        player2.Score++;
-                        Console.SetCursorPosition(100, 1); // Mise à jour de l'affichage du score
-                        Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");
-                    }
-                    break;
-                }
+                if (isRight && CheckWallCollision(roundedX, roundedY, wall2, true, player1)) break;
+                if (!isRight && CheckWallCollision(roundedX, roundedY, wall1, false, player2)) break;
 
-                // Vérification des collisions avec le joueur adverse
-                if (isRight && (int)nextX >= 125 && (int)nextX <= 130 && (int)nextY >= 32 && (int)nextY <= 34) // Joueur 1 tire sur le joueur 2
+                // Collision joueurs
+                if (isRight && roundedX >= 125 && roundedX <= 130 && roundedY >= 32 && roundedY <= 34)
                 {
-                    player2.Lives--;        // Le joueur 2 perd une vie
-                    player1.Score++;        // Le joueur 1 marque un point
+                    player2.Lives--;
+                    player1.Score++;
                     break;
                 }
-                else if (!isRight && (int)nextX >= 20 && (int)nextX <= 25 && (int)nextY >= 32 && (int)nextY <= 34) // Joueur 2 tire sur le joueur 1
+                else if (!isRight && roundedX >= 20 && roundedX <= 25 && roundedY >= 32 && roundedY <= 34)
                 {
-                    player1.Lives--;        // Le joueur 1 perd une vie
-                    player2.Score++;        // Le joueur 2 marque un point
+                    player1.Lives--;
+                    player2.Score++;
                     break;
                 }
 
@@ -155,7 +131,6 @@ namespace balleprojet
                 // Effacer la position précédente de la balle
                 Console.SetCursorPosition((int)posX, (int)posY);
                 Console.Write(' ');
-                Debug.WriteLine("x: " + posX + "y: " + posY);
 
                 // Mise à jour des positions
                 posX = nextX;
@@ -164,6 +139,38 @@ namespace balleprojet
                 // Augmentation du temps
                 t += timeStep;
             }
+        }
+        /// <summary>
+        /// Vérifie collision précise avec mur, mise à jour score.
+        /// </summary>
+        /// <param name="roundedX"></param>
+        /// <param name="roundedY"></param>
+        /// <param name="wall"></param>
+        /// <param name="isRight"></param>
+        /// <param name="attacker"></param>
+        /// <returns></returns>
+        private bool CheckWallCollision(int roundedX, int roundedY, Wall wall, bool isRight, Player attacker)
+        {
+            int wallX = isRight ? 110 : 35;
+            int wallY = 25;
+
+            if (roundedX >= wallX && roundedX <= wallX + 2 && roundedY >= wallY && roundedY < wallY + 6)
+            {
+                int col = (roundedX - wallX); // 0, 1, 2
+                int row = (roundedY - wallY); // 0 à 5
+
+                if (wall.Hit(row, col))
+                {
+                    attacker.Score++;
+
+                    // ✅ Redessiner uniquement la cellule touchée pour l'effacer
+                    Console.SetCursorPosition(wallX + col, wallY + row);
+                    Console.Write(' '); // Effacer la cellule
+
+                    return true; // Collision confirmée
+                }
+            }
+            return false; // Pas de collision
         }
     }
 }
