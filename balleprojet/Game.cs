@@ -134,7 +134,8 @@ namespace balleprojet
             Console.WriteLine($"{currentPlayer.Name}'s turn");                  // Afficher le tour du joueur courant
             int angle = ChooseAngle();                                          // Choisir l'angle de tir
             int power = ChoosePower();                                          // Déterminer la puissance de tir
-            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2,8));     // Créer une balle avec l'angle et la puissance
+            ConsoleColor ballColor = currentPlayer == player1 ? ConsoleColor.Blue : ConsoleColor.Red;
+            ball = new Ball(angle, power, ballColor, soundManager);
 
             // Jouer le son lorsque la balle est lancée
             soundManager.PlaySound();
@@ -297,8 +298,16 @@ namespace balleprojet
         /// </summary>
         private void EndGame()
         {
-            Player winner = player1.Score >= 7 || player2.Lives <= 0 ? player1 : player2;
-            Console.WriteLine($"Le gagnant est {winner.Name} !");
+            Player winner;
+            if (player1.Score >= 7 || player2.Lives <= 0) winner = player1;
+            else winner = player2;
+
+            Console.Clear();
+            Console.SetCursorPosition(50, 20);
+            Console.WriteLine($"🎉 Le gagnant est {winner.Name} ! Félicitations !");
+            Console.SetCursorPosition(50, 22);
+            Console.WriteLine("Appuyez sur une touche pour quitter...");
+            Console.ReadKey();
         }
 
         /// <summary>
