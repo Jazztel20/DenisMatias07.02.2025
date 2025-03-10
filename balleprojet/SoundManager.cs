@@ -15,30 +15,46 @@ using System.Media;
 namespace balleprojet
 {
     /// <summary>
-    /// Déclaration de la classe "SoundManager" pour gérer les sons
+    /// Classe "SoundManager" pour gérer les sons
     /// </summary>
     internal class SoundManager
     {
-        // Déclaration de SoundPlayer
-        private SoundPlayer soundPlayer;
+        private SoundPlayer shotSound;
+        private SoundPlayer hitWallSound;
+        private SoundPlayer hitPlayerSound;
 
         /// <summary>
-        /// Constructeur de la classe SoundManager
+        /// Constructeur pour initialiser tous les sons
         /// </summary>
-        /// <param name="soundFilePath"></param>
-        public SoundManager(string soundFilePath)
+        public SoundManager(string shotSoundPath, string hitWallPath, string hitPlayerPath)
         {
-            // Initialisation de SoundPlayer avec le fichier son
-            soundPlayer = new SoundPlayer(soundFilePath);
+            shotSound = new SoundPlayer(shotSoundPath);
+            hitWallSound = new SoundPlayer(hitWallPath);
+            hitPlayerSound = new SoundPlayer(hitPlayerPath);
         }
 
         /// <summary>
-        /// Méthode pour jouer le son 
+        /// Joue le son du tir
         /// </summary>
-        public void PlaySound()
+        public void PlayShot()
         {
-            // Joue le son
-            soundPlayer.Play();
+            shotSound.Play();
+        }
+
+        /// <summary>
+        /// Joue le son d'impact sur mur
+        /// </summary>
+        public void PlayWallHit()
+        {
+            hitWallSound.Play();
+        }
+
+        /// <summary>
+        /// Joue le son d'impact sur joueur
+        /// </summary>
+        public void PlayPlayerHit()
+        {
+            hitPlayerSound.Play();
         }
     }
 }
