@@ -1,5 +1,4 @@
-﻿
-/// Programmation Orientée Objet en C#
+﻿/// Programmation Orientée Objet en C#
 /// Projet: Jeu de la balle
 /// Prénom et nom : Matias Denis
 /// Cours: I320

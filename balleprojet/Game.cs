@@ -1,5 +1,4 @@
-﻿
-/// Programmation Orientée Objet en C#
+﻿/// Programmation Orientée Objet en C#
 /// Projet: Jeu de la balle
 /// Prénom et nom : Matias Denis
 /// Cours: I320
@@ -25,42 +24,42 @@ namespace balleprojet
         /// Joueur 1
         /// </summary>
         private Player player1;
-        
+
         /// <summary>
         /// Joueur 2
         /// </summary>
-        private Player player2;                     
+        private Player player2;
 
         /// <summary>
         /// Balle
         /// </summary>
-        private Ball ball;                          
+        private Ball ball;
 
         /// <summary>
         /// Mur 1
         /// </summary>
-        private Wall wall1;                        
+        private Wall wall1;
 
         /// <summary>
         /// Mur 2
         /// </summary>
-        private Wall wall2;                         
+        private Wall wall2;
 
         /// <summary>
         /// Joueur actuel
         /// </summary>
-        private Player currentPlayer;               
+        private Player currentPlayer;
 
         /// <summary>
         /// Random
         /// </summary>
-        private Random _random = new Random();      
+        private Random _random = new Random();
 
         /// <summary>
         /// Son de tir
         /// </summary>
-        private SoundManager soundManager;          
-       
+        private SoundManager soundManager;
+
 
         /// <summary>
         /// Constructeur de la classe Game
@@ -105,7 +104,7 @@ namespace balleprojet
             Console.Write($"Vies: {player1.Name} [♥{new string('♥', player1.Lives)}] | Score: {player1.Score}");    // Afficher les vies et le score du joueur 1
             Console.ResetColor();                                                                                   // Retour à la couleur de base
             Console.SetCursorPosition(100, 1);                                                                      // Positionner le curseur
-            Console.ForegroundColor= ConsoleColor.Red;                                                              // Couleur rouge pour le joueur 2
+            Console.ForegroundColor = ConsoleColor.Red;                                                              // Couleur rouge pour le joueur 2
             Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");    // Afficher les vies et le score du joueur 2
             Console.ResetColor();                                                                                   // Retour à la couleur de base
             Console.SetCursorPosition(0, 2);                                                                        // Positionner le curseur
@@ -134,8 +133,7 @@ namespace balleprojet
             Console.WriteLine($"{currentPlayer.Name}'s turn");                  // Afficher le tour du joueur courant
             int angle = ChooseAngle();                                          // Choisir l'angle de tir
             int power = ChoosePower();                                          // Déterminer la puissance de tir
-            ConsoleColor ballColor = currentPlayer == player1 ? ConsoleColor.Blue : ConsoleColor.Red;
-            ball = new Ball(angle, power, ballColor, soundManager);
+            ball = new Ball(angle, power, (ConsoleColor)_random.Next(2, 8));     // Créer une balle avec l'angle et la puissance
 
             // Jouer le son lorsque la balle est lancée
             soundManager.PlaySound();
@@ -150,7 +148,7 @@ namespace balleprojet
             DisplayInterface();     // Afficher l'interface
 
             // Calcul de la trajectoire de la balle et gestion des collisions
-            ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2);  
+            ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2);
             // Code à mettre pour gérer les collisions avec le mur et l'adversaire
         }
 
@@ -279,7 +277,7 @@ namespace balleprojet
                     Console.Write("|");
                 }
                 // Vitesse de la barre de progression
-                System.Threading.Thread.Sleep(10); 
+                System.Threading.Thread.Sleep(10);
             }
 
             return power;
@@ -298,16 +296,8 @@ namespace balleprojet
         /// </summary>
         private void EndGame()
         {
-            Player winner;
-            if (player1.Score >= 7 || player2.Lives <= 0) winner = player1;
-            else winner = player2;
-
-            Console.Clear();
-            Console.SetCursorPosition(50, 20);
-            Console.WriteLine($"🎉 Le gagnant est {winner.Name} ! Félicitations !");
-            Console.SetCursorPosition(50, 22);
-            Console.WriteLine("Appuyez sur une touche pour quitter...");
-            Console.ReadKey();
+            Player winner = player1.Score >= 7 || player2.Lives <= 0 ? player1 : player2;
+            Console.WriteLine($"Le gagnant est {winner.Name} !");
         }
 
         /// <summary>

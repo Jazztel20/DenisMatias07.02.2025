@@ -1,5 +1,4 @@
-﻿
-/// Programmation Orientée Objet en C#
+﻿/// Programmation Orientée Objet en C#
 /// Projet: Jeu de la balle
 /// Prénom et nom : Matias Denis
 /// Cours: I320
@@ -39,11 +38,6 @@ namespace balleprojet
         public ConsoleColor Color { get => _color; set => _color = value; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        private SoundManager soundManager;
-
-        /// <summary>
         /// Constructeur de la classe "Ball"
         /// </summary>
         /// <param name="angle"></param>
@@ -52,19 +46,17 @@ namespace balleprojet
         // ??
         private ConsoleColor _color = ConsoleColor.Green;
 
-
         /// <summary>
         /// Constructeur de la classe "Ball"
         /// </summary>
         /// <param name="angle"></param>
         /// <param name="power"></param>
         /// <param name="color"></param>
-        public Ball(int angle, int power, ConsoleColor color, SoundManager sound)
+        public Ball(int angle, int power, ConsoleColor color)
         {
             Angle = angle;      // Initialise la propriété Angle avec le paramètre angle
             Power = power;      // Initialise la propriété Power avec le paramètre power
             _color = color;     // Initialise la couleur 
-            soundManager = sound;
         }
 
         /// <summary>
@@ -95,8 +87,8 @@ namespace balleprojet
             while (posY <= 32 && posX >= 0 && posX <= 150)
             {
                 // Calcul des positions suivantes de la balle
-                double nextX = isRight 
-                    ? (startX + initialVelocity * Math.Cos(angleInRadians) * t) 
+                double nextX = isRight
+                    ? (startX + initialVelocity * Math.Cos(angleInRadians) * t)
                     : (startX - initialVelocity * Math.Cos(angleInRadians) * t);
                 double nextY = startY - (initialVelocity * Math.Sin(angleInRadians) * t - 0.5 * gravity * t * t);
                 nextY += 1.0; // Ajustement de la position verticale 
@@ -139,36 +131,8 @@ namespace balleprojet
                         player2.Score++;
                         Console.SetCursorPosition(100, 1); // Mise à jour de l'affichage du score
                         Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");
-                        soundManager.PlaySound(); // Son impact mur adverse
-                        break;
                     }
-                }
-
-                // Vérification des collisions avec son propre mur 
-                if (isRight && roundedX >= 35 && roundedX <= 43 && roundedY >= 25 && roundedY <= 30)
-                {
-                    int col = (roundedX - 35) / 3;
-                    if (wall1.Hit(roundedY - 25, col))
-                    {
-                        player1.Lives--;
-                        soundManager.PlaySound(); // Jouer le son à l'impact
-                        Console.SetCursorPosition(50, 36);
-                        Console.WriteLine($"{player1.Name} a touché son propre mur et perd une vie !");
-                        soundManager.PlaySound(); // Son impact mur adverse
-                        break;
-                    }
-                }
-                else if (!isRight && roundedX >= 110 && roundedX <= 118 && roundedY >= 25 && roundedY <= 30)
-                {
-                    int col = (roundedX - 110) / 3;
-                    if (wall2.Hit(roundedY - 25, col))
-                    {
-                        player2.Lives--;
-                        soundManager.PlaySound(); // Jouer le son à l'impact
-                        Console.SetCursorPosition(50, 36);
-                        Console.WriteLine($"{player2.Name} a touché son propre mur et perd une vie !");
-                        break;
-                    }
+                    break;
                 }
 
                 // Vérification des collisions avec le joueur adverse
@@ -176,14 +140,12 @@ namespace balleprojet
                 {
                     player2.Lives--;        // Le joueur 2 perd une vie
                     player1.Score++;        // Le joueur 1 marque un point
-                    soundManager.PlaySound(); // Son impact joueur
                     break;
                 }
                 else if (!isRight && (int)nextX >= 20 && (int)nextX <= 25 && (int)nextY >= 32 && (int)nextY <= 34) // Joueur 2 tire sur le joueur 1
                 {
                     player1.Lives--;        // Le joueur 1 perd une vie
                     player2.Score++;        // Le joueur 2 marque un point
-                    soundManager.PlaySound(); // Son impact joueur
                     break;
                 }
 
