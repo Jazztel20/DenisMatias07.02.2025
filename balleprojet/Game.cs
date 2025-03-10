@@ -72,8 +72,11 @@ namespace balleprojet
             wall1 = new Wall();                 // Création du mur du joueur 1
             wall2 = new Wall();                 // Création du mur du joueur 2
             currentPlayer = player1;            // Le joueur 1 commence
-            soundManager = new SoundManager("C:\\Users\\pb58unc\\Desktop\\DenisMatias07.02.2025\\laser-shot-ingame-230500.wav"); // Déclaration de SoundManager
-            // son collision
+            soundManager = new SoundManager     // Déclaration de SoundManager
+                ("C:\\Users\\pb58unc\\Desktop\\DenisMatias07.02.2025\\laser-shot-ingame-230500.wav",    // tir
+                "C:\\Users\\pb58unc\\Desktop\\DenisMatias07.02.2025\\hit-by-a-wood-230542.wav",         // impact mur
+                "C:\\Users\\pb58unc\\Desktop\\DenisMatias07.02.2025\\metal-hit-15-193280.wav"           // impact joueur
+                ); 
         }
 
         /// <summary>
@@ -136,7 +139,7 @@ namespace balleprojet
             ball = new Ball(angle, power, (ConsoleColor)_random.Next(2, 8));    // Créer une balle avec l'angle et la puissance
 
             // Jouer le son lorsque la balle est lancée
-            soundManager.PlaySound();
+            soundManager.PlayShot();
 
             // Position de départ en fonction du point sélectionné
             int playerX = currentPlayer == player1 ? 15 : 140;
@@ -148,7 +151,7 @@ namespace balleprojet
             DisplayInterface();     // Afficher l'interface
 
             // Calcul de la trajectoire de la balle et gestion des collisions
-            ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2);
+            ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2, soundManager);
         }
 
         /// <summary>
