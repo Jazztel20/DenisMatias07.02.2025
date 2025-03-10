@@ -95,12 +95,6 @@ namespace balleprojet
                 int roundedX = (int)Math.Round(nextX);
                 int roundedY = (int)Math.Round(nextY);
 
-                // Changement de couleur de la balle lors de la redescente
-                if (nextY > posY)
-                {
-                    Color = ConsoleColor.Yellow;
-                }
-
                 // Affichage de la position de la balle
                 Console.SetCursorPosition((int)nextX, (int)nextY);
                 Console.ForegroundColor = _color;
