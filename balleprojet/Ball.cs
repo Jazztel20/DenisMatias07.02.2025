@@ -122,8 +122,6 @@ namespace balleprojet
                 // Vérification des collisions avec le mur adverse
                 if (isRight && roundedX >= 110 && roundedX <= 118 && roundedY >= 25 && roundedY <= 30)
                 {
-                    soundManager.PlaySound();
-
                     int col = (roundedX - 110) / 3; // Définition de la colonne des cellules
                     if (wall2.Hit(roundedY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
                     {
@@ -141,11 +139,12 @@ namespace balleprojet
                         player2.Score++;
                         Console.SetCursorPosition(100, 1); // Mise à jour de l'affichage du score
                         Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");
+                        soundManager.PlaySound(); // Son impact mur adverse
+                        break;
                     }
-                    break;
                 }
 
-                // Collision avec son propre mur 
+                // Vérification des collisions avec son propre mur 
                 if (isRight && roundedX >= 35 && roundedX <= 43 && roundedY >= 25 && roundedY <= 30)
                 {
                     int col = (roundedX - 35) / 3;
@@ -155,6 +154,7 @@ namespace balleprojet
                         soundManager.PlaySound(); // Jouer le son à l'impact
                         Console.SetCursorPosition(50, 36);
                         Console.WriteLine($"{player1.Name} a touché son propre mur et perd une vie !");
+                        soundManager.PlaySound(); // Son impact mur adverse
                         break;
                     }
                 }
@@ -176,12 +176,14 @@ namespace balleprojet
                 {
                     player2.Lives--;        // Le joueur 2 perd une vie
                     player1.Score++;        // Le joueur 1 marque un point
+                    soundManager.PlaySound(); // Son impact joueur
                     break;
                 }
                 else if (!isRight && (int)nextX >= 20 && (int)nextX <= 25 && (int)nextY >= 32 && (int)nextY <= 34) // Joueur 2 tire sur le joueur 1
                 {
                     player1.Lives--;        // Le joueur 1 perd une vie
                     player2.Score++;        // Le joueur 2 marque un point
+                    soundManager.PlaySound(); // Son impact joueur
                     break;
                 }
 
