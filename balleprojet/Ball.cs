@@ -158,17 +158,26 @@ namespace balleprojet
             // Vérification que la balle est dans la zone du mur
             if (roundedX >= wallX && roundedX <= wallX + 2 && roundedY >= wallY && roundedY < wallY + 6)
             {
-                int col = roundedX - wallX;     // Calcul de la colonne exacte (0 à 2)
-                int row = roundedY - wallY;     // Calcul de la ligne exacte (0 à 5)
+                int col = roundedX - wallX; // Calcul précis de la colonne
+                int row = roundedY - wallY; // Calcul précis de la ligne
 
-                if (wall.Hit(row, col))         // Si la cellule est touchée et encore visible
+                // Vérification sécurité : indices dans les limites du tableau
+                if (col >= 0 && col < 3 && row >= 0 && row < 6)
                 {
-                    attacker.Score++;          // Mise à jour du score
+                    if (wall.Hit(row, col)) // Vérifie si la cellule est encore visible
+                    {
+                        attacker.Score++; // Mise à jour du score
 
-                    Console.SetCursorPosition(wallX + col, wallY + row);
-                    Console.Write(' ');        // Effacer visuellement la cellule touchée
+                        // Efface visuellement la cellule touchée
+                        Console.SetCursorPosition(wallX + col, wallY + row);
+                        Console.Write(' ');
 
-                    return true;               // Collision confirmée
+                        // (Optionnel) Debug affichage : position touchée
+                        // Console.SetCursorPosition(0, 34);
+                        // Console.Write($"Impact : Colonne {col}, Ligne {row}");
+
+                        return true; // Collision détectée
+                    }
                 }
             }
             return false; // Pas de collision
