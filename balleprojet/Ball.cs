@@ -70,7 +70,7 @@ namespace balleprojet
         /// <param name="player2"></param>
         /// <param name="wall1"></param>
         /// <param name="wall2"></param>
-        public void CalculateTrajectory(int startX, int startY, int power, bool isRight, Player player1, Player player2, Wall wall1, Wall wall2)
+        public void CalculateTrajectory(int startX, int startY, int power, bool isRight, Player player1, Player player2, Wall wall1, Wall wall2, SoundManager soundManager)
         {
             // Constantes de la simulation
             double gravity = 9.81;                              // m/s^2
@@ -102,24 +102,26 @@ namespace balleprojet
                 Console.ResetColor();
 
                 // Vérification des collisions avec le mur adverse
-                if (isRight && CheckWallCollision(roundedX, roundedY, wall2, true, player1)) break;
-                if (!isRight && CheckWallCollision(roundedX, roundedY, wall1, false, player2)) break;
+                if (isRight && CheckWallCollision(roundedX, roundedY, wall2, true, player1, soundManager)) break;
+                if (!isRight && CheckWallCollision(roundedX, roundedY, wall1, false, player2, soundManager)) break;
 
                 // Vérification collision avec son propre mur
-                if (isRight && CheckOwnWallCollision(roundedX, roundedY, wall1, isRight, player1, player2)) break;
-                if (!isRight && CheckOwnWallCollision(roundedX, roundedY, wall2, isRight, player2, player1)) break;
+                if (isRight && CheckOwnWallCollision(roundedX, roundedY, wall1, isRight, player1, player2, soundManager)) break;
+                if (!isRight && CheckOwnWallCollision(roundedX, roundedY, wall2, isRight, player2, player1, soundManager)) break;
 
                 // Collision joueurs
                 if (isRight && roundedX >= 130 && roundedX <= 135 && roundedY >= 32 && roundedY <= 34)
                 {
                     player2.Lives--;
                     player1.Score++;
+                    soundManager.PlayPlayerHit(); // Son impact joueur
                     break;
                 }
                 else if (!isRight && roundedX >= 15 && roundedX <= 20 && roundedY >= 32 && roundedY <= 34)
                 {
                     player1.Lives--;
                     player2.Score++;
+                    soundManager.PlayPlayerHit(); // Son impact joueur
                     break;
                 }
 
@@ -143,7 +145,7 @@ namespace balleprojet
         /// <summary>
         /// Vérifie si la balle touche son propre mur. Si oui, perte de vie et gain de score pour l'adversaire.
         /// </summary>
-        private bool CheckOwnWallCollision(int roundedX, int roundedY, Wall ownWall, bool isRight, Player attacker, Player opponent)
+        private bool CheckOwnWallCollision(int roundedX, int roundedY, Wall ownWall, bool isRight, Player attacker, Player opponent, SoundManager soundManager)
         {
             int wallX = isRight ? 35 : 110; // Le mur du joueur qui tire
             int wallY = 25;
@@ -164,9 +166,7 @@ namespace balleprojet
                         Console.SetCursorPosition(wallX + col, wallY + row);
                         Console.Write(' ');
 
-                        // (Optionnel) Affichage pour debug
-                        // Console.SetCursorPosition(0, 34);
-                        // Console.Write($"Mur propre touché : Col {col}, Ligne {row} ");
+                        soundManager.PlayWallHit();
 
                         return true; // Collision avec son propre mur détectée
                     }
@@ -184,7 +184,7 @@ namespace balleprojet
         /// <param name="isRight"></param>
         /// <param name="attacker"></param>
         /// <returns></returns>
-        private bool CheckWallCollision(int roundedX, int roundedY, Wall wall, bool isRight, Player attacker)
+        private bool CheckWallCollision(int roundedX, int roundedY, Wall wall, bool isRight, Player attacker, SoundManager soundManager)
         {
             int wallX = isRight ? 110 : 35;     // X de départ du mur
             int wallY = 25;                     // Y de départ du mur
@@ -206,9 +206,7 @@ namespace balleprojet
                         Console.SetCursorPosition(wallX + col, wallY + row);
                         Console.Write(' ');
 
-                        // (Optionnel) Debug affichage : position touchée
-                        // Console.SetCursorPosition(0, 34);
-                        // Console.Write($"Impact : Colonne {col}, Ligne {row}");
+                        soundManager.PlayWallHit();
 
                         return true; // Collision détectée
                     }
