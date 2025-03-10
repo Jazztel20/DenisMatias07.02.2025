@@ -39,6 +39,11 @@ namespace balleprojet
         public ConsoleColor Color { get => _color; set => _color = value; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        private SoundManager soundManager;
+
+        /// <summary>
         /// Constructeur de la classe "Ball"
         /// </summary>
         /// <param name="angle"></param>
@@ -47,17 +52,19 @@ namespace balleprojet
         // ??
         private ConsoleColor _color = ConsoleColor.Green;
 
+
         /// <summary>
         /// Constructeur de la classe "Ball"
         /// </summary>
         /// <param name="angle"></param>
         /// <param name="power"></param>
         /// <param name="color"></param>
-        public Ball(int angle, int power, ConsoleColor color)
+        public Ball(int angle, int power, ConsoleColor color, SoundManager sound)
         {
             Angle = angle;      // Initialise la propriété Angle avec le paramètre angle
             Power = power;      // Initialise la propriété Power avec le paramètre power
             _color = color;     // Initialise la couleur 
+            soundManager = sound;
         }
 
         /// <summary>
@@ -115,6 +122,8 @@ namespace balleprojet
                 // Vérification des collisions avec le mur adverse
                 if (isRight && roundedX >= 110 && roundedX <= 118 && roundedY >= 25 && roundedY <= 30)
                 {
+                    soundManager.PlaySound();
+
                     int col = (roundedX - 110) / 3; // Définition de la colonne des cellules
                     if (wall2.Hit(roundedY - 25, col)) // Utilisation de la méthode Hit de la classe Wall
                     {
@@ -134,6 +143,32 @@ namespace balleprojet
                         Console.Write($"Vies: {player2.Name} [♥{new string('♥', player2.Lives)}] | Score: {player2.Score}");
                     }
                     break;
+                }
+
+                // Collision avec son propre mur 
+                if (isRight && roundedX >= 35 && roundedX <= 43 && roundedY >= 25 && roundedY <= 30)
+                {
+                    int col = (roundedX - 35) / 3;
+                    if (wall1.Hit(roundedY - 25, col))
+                    {
+                        player1.Lives--;
+                        soundManager.PlaySound(); // Jouer le son à l'impact
+                        Console.SetCursorPosition(50, 36);
+                        Console.WriteLine($"{player1.Name} a touché son propre mur et perd une vie !");
+                        break;
+                    }
+                }
+                else if (!isRight && roundedX >= 110 && roundedX <= 118 && roundedY >= 25 && roundedY <= 30)
+                {
+                    int col = (roundedX - 110) / 3;
+                    if (wall2.Hit(roundedY - 25, col))
+                    {
+                        player2.Lives--;
+                        soundManager.PlaySound(); // Jouer le son à l'impact
+                        Console.SetCursorPosition(50, 36);
+                        Console.WriteLine($"{player2.Name} a touché son propre mur et perd une vie !");
+                        break;
+                    }
                 }
 
                 // Vérification des collisions avec le joueur adverse
