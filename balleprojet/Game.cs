@@ -110,8 +110,8 @@ namespace balleprojet
             Console.SetCursorPosition(0, 2);                                                                        // Positionner le curseur
             Console.WriteLine(new string('_', 150));                                                                // Afficher une ligne de séparation
 
-            DrawPlayer(20, 32, true);       // Dessiner le joueur 1
-            DrawPlayer(125, 32, false);     // Dessiner le joueur 2
+            DrawPlayer(15, 32, true);       // Dessiner le joueur 1
+            DrawPlayer(130, 32, false);     // Dessiner le joueur 2
 
             DrawWall(110, 30, wall2);              // Dessiner le mur du joueur 1
             DrawWall(35, 30, wall1);               // Dessiner le mur du joueur 2
@@ -139,7 +139,7 @@ namespace balleprojet
             soundManager.PlaySound();
 
             // Position de départ en fonction du point sélectionné
-            int playerX = currentPlayer == player1 ? 20 : 125;
+            int playerX = currentPlayer == player1 ? 15 : 140;
             int playerY = 32;
             int startX = currentPlayer == player1 ? playerX + 2 + 2 * (angle / 10) : playerX - (2 + 2 * (angle / 10));
             int startY = playerY - (angle / 10);
@@ -149,7 +149,6 @@ namespace balleprojet
 
             // Calcul de la trajectoire de la balle et gestion des collisions
             ball.CalculateTrajectory(startX, startY, power, currentPlayer == player1, player1, player2, wall1, wall2);
-            // Code à mettre pour gérer les collisions avec le mur et l'adversaire
         }
 
         /// <summary>
@@ -335,25 +334,28 @@ namespace balleprojet
         /// <summary>
         /// Méthode pour dessiner un mur
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">Position de départ horizontale</param>
+        /// <param name="y">Position de départ verticale</param>
+        /// <param name="wall">Objet mur contenant les cellules</param>
         private void DrawWall(int x, int y, Wall wall)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++) // 6 lignes (0 à 5)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 3; j++) // 3 colonnes (0 à 2)
                 {
-                    Console.SetCursorPosition(x + j, y + i);
-                    if (wall.Cells[i, j].EstVisible)
+                    Console.SetCursorPosition(x + j, y + i); // Position console pour chaque cellule
+
+                    if (wall.Cells[i, j].EstVisible) // Si la cellule est visible (non touchée)
                     {
-                        Console.Write("█");
+                        Console.Write("█"); // Affiche le bloc
                     }
                     else
                     {
-                        Console.Write(" "); // Effacer la cellule touchée 
+                        Console.Write(" "); // Efface la cellule touchée
                     }
                 }
             }
         }
+
     }
 }
