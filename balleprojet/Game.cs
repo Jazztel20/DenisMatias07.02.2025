@@ -3,11 +3,6 @@
 /// Prénom et nom : Matias Denis
 /// Cours: I320
 /// Classe: FID1
-/// Description: la classe Game orchestre le déroulement du jeu en gérant 
-///              les joueurs, les murs, la balle et l'interface 
-///              utilisateur, tout en encapsulant la logique des tours,
-///              des collisions, de la sélection des angles et de la
-///              puissance, ainsi que l'affichage et la fin de la partie.
 
 using System;
 using System.Diagnostics;
@@ -16,7 +11,11 @@ using System.Diagnostics;
 namespace balleprojet
 {
     /// <summary>
-    /// Déclaration de classe "Game"
+    /// La classe Game orchestre le déroulement du jeu en gérant 
+    /// les joueurs, les murs, la balle et l'interface 
+    /// utilisateur, tout en encapsulant la logique des tours,
+    /// des collisions, de la sélection des angles et de la
+    /// puissance, ainsi que l'affichage et la fin de la partie.
     /// </summary>
     internal class Game
     {

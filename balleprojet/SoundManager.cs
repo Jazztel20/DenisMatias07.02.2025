@@ -3,10 +3,6 @@
 /// Prénom et nom : Matias Denis
 /// Cours: I320
 /// Classe: FID1
-/// Description: la classe SoundManager gère la lecture de fichiers son
-///              en utilisant la classe SoundPlayer, avec un constructeur
-///              pour initialiser le fichier audio et une méthode PlaySound
-///              pourjouer avec les sons.
 
 // Ligne pour utiliser Sound Manager
 using System.Media;
@@ -15,10 +11,16 @@ using System.Media;
 namespace balleprojet
 {
     /// <summary>
-    /// Classe "SoundManager" pour gérer les sons
+    /// La classe SoundManager gère la lecture de fichiers son
+    /// en utilisant la classe SoundPlayer, avec un constructeur
+    /// pour initialiser le fichier audio et une méthode PlaySound
+    /// pourjouer avec les sons.
     /// </summary>
     internal class SoundManager
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private SoundPlayer shotSound;
         private SoundPlayer hitWallSound;
         private SoundPlayer hitPlayerSound;

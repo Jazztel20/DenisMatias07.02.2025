@@ -4,16 +4,15 @@
 /// Prénom et nom : Matias Denis
 /// Cours: I320
 /// Classe: FID1
-/// Description: La classe Wall représente un mur composé d'un tableau 
-///              2D de cellules (Mur), initialisées et manipulées via
-///              un constructeur, permettant de gérer l'état de visibilité 
-///              des cellules lorsqu'elles sont touchées grâce à la méthode Hit.
 
 // Déclaration de l'espace de noms "balleprojet"
 namespace balleprojet
 {
     /// <summary>
-    /// Déclaration de la classe "Wall"
+    /// La classe Wall représente un mur composé d'un tableau 
+    /// 2D de cellules (Mur), initialisées et manipulées via
+    /// un constructeur, permettant de gérer l'état de visibilité 
+    /// des cellules lorsqu'elles sont touchées grâce à la méthode Hit.
     /// </summary>
     internal class Wall
     {

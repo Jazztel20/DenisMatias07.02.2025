@@ -3,20 +3,18 @@
 /// Prénom et nom : Matias Denis
 /// Cours: I320
 /// Classe: FID1
-/// Description: la classe Ball représente une balle avec des propriétés 
-///              comme l'angle, la puissance et la couleur, utilise un 
-///              constructeur pour initialiser ses attributs, et comprend 
-///              une méthode CalculateTrajectory pour simuler et visualiser
-///              le déplacement et les collisions de la balle dans le jeu.
 
 using System;
-using System.Diagnostics;
 
 // Déclaration de l'espace de noms "balleprojet"
 namespace balleprojet
 {
     /// <summary>
-    /// Déclaration de classe "Ball"
+    /// La classe Ball représente une balle avec des propriétés 
+    /// comme l'angle, la puissance et la couleur, utilise un 
+    /// constructeur pour initialiser ses attributs, et comprend 
+    /// une méthode CalculateTrajectory pour simuler et visualiser
+    /// le déplacement et les collisions de la balle dans le jeu.
     /// </summary>
     internal class Ball
     {
@@ -186,6 +184,7 @@ namespace balleprojet
         /// <returns></returns>
         private bool CheckWallCollision(int roundedX, int roundedY, Wall wall, bool isRight, Player attacker, SoundManager soundManager)
         {
+
             int wallX = isRight ? 110 : 35;     // X de départ du mur
             int wallY = 25;                     // Y de départ du mur
 

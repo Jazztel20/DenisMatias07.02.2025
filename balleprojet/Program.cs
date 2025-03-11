@@ -21,8 +21,7 @@ namespace balleprojet
         /// <summary>
         /// Déclaration de la méthode principale "Main"
         /// </summary>
-        /// <param name="args"></param>
-        static void Main(string[] args)
+        static void Main()
         {
             // Définition de la taille de la fenêtre console et effacement de l'écran
             Console.SetWindowSize(150, 40); // au début du programme
@@ -30,7 +29,7 @@ namespace balleprojet
             // Création d'une instance de la classe "Game"
             Game game = new Game();
 
-            // Appel de la méthode "Start" de l'objet "game" pour démarrer le jeu
+            // Appel de la méthode "Start" de l'objet "game" pour
             game.Start();
         }
     }
@@ -42,3 +41,4 @@ namespace balleprojet
 /// ajouter son à l'impact  
 /// rapport à compléter en expliquant la différence entre les méthodes de départ et celles utilisées, 
 /// ainsi que l'aide de l'IA
+/// Balle sortie du terrain
