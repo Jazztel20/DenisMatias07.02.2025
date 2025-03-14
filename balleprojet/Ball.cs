@@ -186,16 +186,16 @@ namespace balleprojet
         {
 
             int wallX = isRight ? 110 : 35;     // X de départ du mur
-            int wallY = 25;                     // Y de départ du mur
+            int wallY = 30;                     // Y de départ du mur
 
             // Vérification que la balle est dans la zone du mur
-            if (roundedX >= wallX && roundedX <= wallX + 2 && roundedY >= wallY && roundedY < wallY + 6)
+            if (roundedX >= wallX && roundedX <= wallX + 2 && roundedY >= wallY && roundedY < wallY + 4)
             {
                 int col = roundedX - wallX; // Calcul précis de la colonne
                 int row = roundedY - wallY; // Calcul précis de la ligne
 
                 // Vérification sécurité : indices dans les limites du tableau
-                if (col >= 0 && col < 3 && row >= 0 && row < 6)
+                if (col >= 0 && col < 3 && row >= 0 && row < 5)
                 {
                     if (wall.Hit(row, col)) // Vérifie si la cellule est encore visible
                     {
